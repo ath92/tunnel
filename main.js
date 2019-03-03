@@ -24,7 +24,7 @@ function draw() {
 	drawCircle(windowWidth / 2, // x
 	           windowHeight / 2, // y
 	           windowHeight / 3, // radius
-	           5000 + Math.cos(mouseX / windowWidth * 2 * Math.PI) * 500, // segments
+	           10000 + Math.cos(mouseX / windowWidth * 2 * Math.PI) * 5000, // segments
 	           Math.cos(current / 30) * 100, //wobbleFactor
 	           Math.sin(current / 60) + 100); // wobblePeriod
 }
