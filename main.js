@@ -23,15 +23,14 @@ function draw() {
 	background(0);
 	drawCircle(windowWidth / 2, // x
 	           windowHeight / 2, // y
-	           windowHeight / 3, // radius
+	           windowHeight / 3 + Math.sin(current / 30) * 50 + 50, // radius
 	           1000 + Math.cos(mouseX / windowWidth * 2 * Math.PI) * 500, // segments
-	           Math.cos(current / 30) + 1, //wobbleFactor
-	           Math.sin(current / 60) + 100); // wobblePeriod
+	           Math.cos(current / 30) * 50 + 50, //wobbleFactor
+	           Math.sin(current / 100000) + 100); // wobblePeriod
 }
 
 function drawCircle(x, y, radius, segments, wobbleFactor = 0.1, wobblePeriod = 1) {
 	for (let i = 0; i < segments; i++){
-		strokeWeight((Math.sin(i/20 + counter/80) * 100) / 50);
 		line(x + Math.sin(((i - 1) / segments) * 2 * Math.PI) * (radius + Math.sin((i - 1) * wobblePeriod) * radius * wobbleFactor),
 			 y + Math.cos(((i - 1) / segments) * 2 * Math.PI) * (radius + Math.sin((i - 1) * wobblePeriod) * radius * wobbleFactor),
 			 x + Math.sin((i / segments) * 2 * Math.PI) * (radius + Math.sin(i * wobblePeriod) * radius * wobbleFactor),
