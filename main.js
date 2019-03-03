@@ -20,19 +20,18 @@ function draw() {
 	actualY += (targetY - actualY) / 20;
 	counter++;
 	const current = counter + mouseY;
-	background(Math.sin(counter / 1.3) > 0.99 ? 255 : 0);
+	background(0);
 	drawCircle(windowWidth / 2, // x
 	           windowHeight / 2, // y
 	           windowHeight / 3, // radius
 	           1000 + Math.cos(mouseX / windowWidth * 2 * Math.PI) * 500, // segments
-	           Math.cos(current / 30) * 100 + 100, //wobbleFactor
+	           Math.cos(current / 30) + 1, //wobbleFactor
 	           Math.sin(current / 60) + 100); // wobblePeriod
 }
 
 function drawCircle(x, y, radius, segments, wobbleFactor = 0.1, wobblePeriod = 1) {
 	for (let i = 0; i < segments; i++){
-		strokeWeight((i % Math.sin(counter/20) * 100) / 50);
-		stroke(Math.sin(i / 1000) * 255, Math.sin(i / 1000 * 2) * 255, Math.sin(i / 1000 * 3) * 255);
+		strokeWeight((Math.sin(i/20 + counter/80) * 100) / 50);
 		line(x + Math.sin(((i - 1) / segments) * 2 * Math.PI) * (radius + Math.sin((i - 1) * wobblePeriod) * radius * wobbleFactor),
 			 y + Math.cos(((i - 1) / segments) * 2 * Math.PI) * (radius + Math.sin((i - 1) * wobblePeriod) * radius * wobbleFactor),
 			 x + Math.sin((i / segments) * 2 * Math.PI) * (radius + Math.sin(i * wobblePeriod) * radius * wobbleFactor),
