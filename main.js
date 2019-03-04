@@ -1,39 +1,27 @@
-let targetX, targetY, actualX, actualY;
-
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	stroke(255);
-	actualX = 0;
-	actualY = 0;
-	setTarget();
-}
-
-function setTarget(){
-	targetX = Math.random() * windowWidth;
-	targetY = Math.random() * windowHeight;
-	setTimeout(setTarget, 1000);
+	// colorMode(HSL, 255);
 }
 
 let counter = 0;
 function draw() {
-	actualX += (targetX - actualX) / 20;
-	actualY += (targetY - actualY) / 20;
 	counter += (mouseY / windowHeight) * 2 - 1;
 	blendMode(DARKEST);
-	background(0);
+	background(0, 0, 0);
 	blendMode(ADD);
 	drawCircle(windowWidth / 2, // x
 	           windowHeight / 2, // y
-	           windowHeight / 3, // radius
+	           windowHeight / 2, // radius
 	           2000, // segments
-	           Math.cos(counter / 1000 + Math.PI) * 500 + 500, //wobbleFactor
+	           Math.cos(counter / 1000 + Math.PI) * 700 + 700, //wobbleFactor
 	           Math.sin(counter / 1000000) * 0.5 + (mouseX / windowWidth - 0.5) * 0.05 + 1 * Math.PI); // wobblePeriod
 }
 
 function drawCircle(x, y, radius, segments, wobbleFactor = 0.1, wobblePeriod = 1) {
 	for (let i = 0; i < segments; i++){
-		strokeWeight(0.3);
-		stroke((Math.sin(counter % i) + 10) * 255 + 255, Math.sin(i/2000 + counter/100) * 255 + 255, Math.cos(i/3000 + counter/100) * 255 + 255)
+		strokeWeight(0.2);
+		// colorMode(HSL, 255);
+		stroke((Math.sin(counter / 40)) * 125 + 255, 120, (Math.cos(counter / 50)) * 125 + 255)
 		line(x + Math.sin(((i - 1) / segments) * 2 * Math.PI) * (radius + Math.sin((i - 1) * wobblePeriod) * radius * wobbleFactor),
 			 y + Math.cos(((i - 1) / segments) * 2 * Math.PI) * (radius + Math.sin((i - 1) * wobblePeriod) * radius * wobbleFactor),
 			 x + Math.sin((i / segments) * 2 * Math.PI) * (radius + Math.sin(i * wobblePeriod) * radius * wobbleFactor),
