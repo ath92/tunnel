@@ -18,7 +18,7 @@ let counter = 0;
 function draw() {
 	actualX += (targetX - actualX) / 20;
 	actualY += (targetY - actualY) / 20;
-	counter++;
+	counter += (mouseY / windowHeight) * 2 - 1;
 	blendMode(DARKEST);
 	background(0);
 	blendMode(ADD);
@@ -26,16 +26,17 @@ function draw() {
 	           windowHeight / 2, // y
 	           windowHeight / 3, // radius
 	           2000, // segments
-	           Math.cos(counter / 1000 + Math.PI) * 500 + 499, //wobbleFactor
-	           Math.sin(counter / 1000000) * 0.5); // wobblePeriod
+	           Math.cos(counter / 1000 + Math.PI) * 500 + 500, //wobbleFactor
+	           Math.sin(counter / 1000000) * 0.5 + (mouseX / windowWidth - 0.5) * 0.05 + 1 * Math.PI); // wobblePeriod
 }
 
 function drawCircle(x, y, radius, segments, wobbleFactor = 0.1, wobblePeriod = 1) {
 	for (let i = 0; i < segments; i++){
+		strokeWeight(0.3);
 		stroke((Math.sin(counter % i) + 10) * 255 + 255, Math.sin(i/2000 + counter/100) * 255 + 255, Math.cos(i/3000 + counter/100) * 255 + 255)
-		line(x + Math.sin(((i - 1) / segments) * 2 * Math.PI) * (radius + Math.sin((i - 1) * wobblePeriod * 2) * radius * wobbleFactor),
-			 y + Math.cos(((i - 1) / segments) * 2 * Math.PI) * (radius + Math.sin((i - 1) * wobblePeriod * 3) * radius * wobbleFactor),
-			 x + Math.sin((i / segments) * 2 * Math.PI) * (radius + Math.sin(i * wobblePeriod ) * radius * wobbleFactor),
+		line(x + Math.sin(((i - 1) / segments) * 2 * Math.PI) * (radius + Math.sin((i - 1) * wobblePeriod) * radius * wobbleFactor),
+			 y + Math.cos(((i - 1) / segments) * 2 * Math.PI) * (radius + Math.sin((i - 1) * wobblePeriod) * radius * wobbleFactor),
+			 x + Math.sin((i / segments) * 2 * Math.PI) * (radius + Math.sin(i * wobblePeriod) * radius * wobbleFactor),
 			 y + Math.cos((i / segments) * 2 * Math.PI) * (radius + Math.sin(i * wobblePeriod) * radius * wobbleFactor));
 	}
 }
